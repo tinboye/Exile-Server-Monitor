@@ -4,6 +4,7 @@
 ::
 ::https://community.bistudio.com/wiki/Arma_3_Startup_Parameters
 ::
+::Edit only raw text, nothing between % % tags, and only after the = sign
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Name of Server
 set "_servername=Name of Server"
@@ -12,9 +13,9 @@ title %_servername%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: paths to programs without \
 ::
-set "_armaserverpath=D:\Games\Servers\epoch"
+set "_armaserverpath=c:\path\to\server"
 set "_ServerMonitorPath=%_armaserverpath%"
-set "_becpath="%_armaserverpath%\bec"
+::set "_becpath="%_armaserverpath%\bec"
 set "_ASM="%_armaserverpath%"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: port to server
@@ -23,26 +24,26 @@ set "_port=2302"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: path to server.cfg or config.cfg
 ::
-set "_config=%_armaserverpath%\sc\config.cfg"
+set "_config=%_armaserverpath%\@exileserver\config.cfg"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: path to basic.cfg or arma3.cfg
 ::
-set "_cfg=%_armaserverpath%\sc\basic.cfg"
+set "_cfg=%_armaserverpath%\@exileserver\basic.cfg"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: folder name in your arma3server folder to store rpt
-set "_profiles=%_armaserverpath%\a3ds"
+set "_profiles=%_armaserverpath%\%_name%"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: will create user folder under profiles folder
 ::
-set "_name=a3ds"
+set "_name=A3DS"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: enter your client mods below
 ::
-set "_mods=@Epoch;@Ryanzombies"
+set "_mods=@Exile;"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: enter mods that are only required by the server and not the clients.
 ::
-set "_servermods=@epochhive"
+set "_servermods=@exileserver;@ASM;"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: path to ranking.log
 ::
@@ -75,7 +76,7 @@ set "_cpu=4"
 set "_malloc=system"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
-taskkill /im Bec.exe
+::taskkill /im Bec.exe
 taskkill /im ArmaServerMonitor.exe
 taskkill /f /fi "status eq not responding" /im arma3server.exe
 taskkill /f /im arma3server.exe
@@ -98,18 +99,17 @@ echo %_servername% has started..
 timeout 5
 
 ::CHANGE THE DIRECTORY BELOW TO THE PROPER LOCATION
-set ServerMonitorPath="C:\arma3serverconfig\"
-cd /d %ServerMonitorPath%
+cd /d %_ServerMonitorPath%
 start "" "servermonitor.bat"
 echo Server Monitor has started. Have Fun
 timeout 3
 
 ::CHANGE THE DIRECTORY BELOW TO THE PROPER LOCATION
-cd /d %_becpath%
-start "" /min "Bec.exe" -f Config.cfg
-timeout 1
-echo Battleye Extended Controls has started.. 
-timeout 3
+::cd /d %_becpath%
+::start "" /min "Bec.exe" -f Config.cfg
+::timeout 1
+::echo Battleye Extended Controls has started.. 
+::timeout 3
 
 ::CHANGE THE DIRECTORY BELOW TO THE PROPER LOCATION
 cd /d %_ASM%
