@@ -3,8 +3,8 @@
 ::Set Name of Server, the same as what you placed in server_start.bat
 set "_servername=Name of Server"
 ::
-::Add a \ at the end of path!
-set "_armaserverpath=D:\Games\Servers\epoch\"
+::Do Not add a \ at the end of path!
+set "_armaserverpath=c:\path\to\server"
 ::
 ::Set the time that monitor will check to see if server is down, in seconds
 set "_time=180"
@@ -16,7 +16,7 @@ C:\Windows\System32\tasklist /FI "IMAGENAME eq arma3server.exe" 2>NUL | C:\Windo
 if "%ERRORLEVEL%"=="0" goto loop
 echo %_servername% is not running, will be started now 
 :: SET DIRECTORY TO PROPER LOCATION
-start "" /min /wait "%_armaserverpath%start_server.bat" 
+start "" /min /wait "%_armaserverpath%\start_server.bat" 
 timeout 30
 ::
 echo Server started succesfully
